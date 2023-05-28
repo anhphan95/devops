@@ -8,5 +8,6 @@ Docs: https://ranchermanager.docs.rancher.com/v2.0-v2.4/how-to-guides/advanced-u
 # sstep 3: copy file to ~/.kube/config 
 ![rkeconfig](./image/rke01.png)
 
+example file kubectl.conf
 
 
