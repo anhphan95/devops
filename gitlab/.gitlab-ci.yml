@@ -1,5 +1,30 @@
-stage:
-  - approval
-  - tag
+
+# .gitlab-ci.yml
+
+stages:
   - build
-  - update mainfest
+  - test
+  - deploy
+  - create_tag
+
+build_app:
+  stage: build
+  script:
+    - # Add your build script here
+
+test_app:
+  stage: test
+  script:
+    - # Add your test script here
+
+deploy_app:
+  stage: deploy
+  script:
+    - # Add your deployment script here
+
+create_tag:
+  stage: create_tag
+  script:
+    - if [ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" = "uat" ]; then LAST_TAG=$(git describe --abbrev=0 --tags); LAST_VERSION_NUM=${LAST_TAG:1}; NEXT_VERSION_NUM=$((LAST_VERSION_NUM + 1)); NEXT_TAG="v$NEXT_VERSION_NUM"; git tag $NEXT_TAG -m "Automatically generated tag for UAT release"; git push --tags; fi
+  only:
+    - merge_requests
